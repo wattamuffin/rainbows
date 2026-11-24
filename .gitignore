@@ -1,33 +1,41 @@
-# Gradle
+# gradle
+
 .gradle/
 build/
 out/
+classes/
+remappedSrc/
 
-run/
-run-data/
-logs/
-crash-reports/
+# eclipse
 
-# IntelliJ IDEA
+*.launch
+
+# idea
+
 .idea/
 *.iml
-*.iws
 *.ipr
+*.iws
 
-# Eclipse
+# vscode
+
 .settings/
+.vscode/
+bin/
 .classpath
 .project
-.metadata/
-bin/
 
-# VS Code
-.vscode/
+# macos
 
-Thumbs.db
-Desktop.ini
-.DS_Store
+*.DS_Store
 
-*.class
-*.jar
-!gradle/wrapper/gradle-wrapper.jar
+# fabric
+
+run/
+
+# java
+
+hs_err_*.log
+replay_*.log
+*.hprof
+*.jfr
