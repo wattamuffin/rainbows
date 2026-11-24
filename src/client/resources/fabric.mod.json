@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "rainbows",
+  "version": "${version}",
+  "name": "Rainbows!",
+  "description": "Adds cozy pixelated rainbows",
+  "authors": ["wattamuffin"],
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.example.rainbows.RainbowsClient"
+    ],
+    "modmenu": [
+      "com.example.rainbows.RainbowsModMenu"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
