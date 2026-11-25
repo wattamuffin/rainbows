@@ -58,10 +58,10 @@ public class RainbowsConfig {
 
     public SpawnCondition spawnCondition = SpawnCondition.AFTER_RAIN;
     public int chance = 40; // 0 to 100
-    public int saturation = 65; // 0 to 100
-    public DetailLevel detailLevel = DetailLevel.X16;
+    public int saturation = 45; // 0 to 100
+    public DetailLevel detailLevel = DetailLevel.X32;
     public boolean moonbowEnabled = true;
-    public int moonbowSaturation = 20; // 0 to 100 (% of daytime saturation)
+    public int moonbowSaturation = 100; // 0 to 100 (% of daytime saturation)
     public boolean realisticBehavior = false;
 
     private static RainbowsConfig instance;
