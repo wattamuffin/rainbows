@@ -9,10 +9,10 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "com.example.rainbows.RainbowsClient"
+      "com.wattamuffin.rainbows.RainbowsClient"
     ],
     "modmenu": [
-      "com.example.rainbows.RainbowsModMenu"
+      "com.wattamuffin.rainbows.RainbowsModMenu"
     ]
   },
   "depends": {
