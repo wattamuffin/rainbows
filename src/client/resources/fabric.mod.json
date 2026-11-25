@@ -5,6 +5,7 @@
   "name": "Rainbows!",
   "description": "Adds cozy pixelated rainbows",
   "authors": ["wattamuffin"],
+  "icon": "assets/rainbows/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
