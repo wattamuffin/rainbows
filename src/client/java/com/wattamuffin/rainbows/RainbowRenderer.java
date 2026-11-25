@@ -3,16 +3,13 @@
 // ██████╔╝███████║██║██╔██╗ ██║██████╔╝██║   ██║██║ █╗ ██║███████╗██║
 // ██╔══██╗██╔══██║██║██║╚██╗██║██╔══██╗██║   ██║██║███╗██║╚════██║╚═╝
 // ██║  ██║██║  ██║██║██║ ╚████║██████╔╝╚██████╔╝╚███╔███╔╝███████║██╗
-// ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚══════╝╚═╝
+// ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝  ╚══╝╚══╝ ╚══════╝╚═╝                                                                
 package com.wattamuffin.rainbows;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderContext;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import org.joml.Matrix4f;
 
@@ -21,10 +18,6 @@ import java.util.List;
 
 public class RainbowRenderer {
     private record PixelQuad(float x0, float y0, float x1, float y1, float r, float g, float b, float edgeFade) {}
-
-    private static final int FULL_BRIGHT = 0x00F000F0;
-    private static final Identifier WHITE_TEXTURE = Identifier.withDefaultNamespace("textures/misc/white.png");
-    private static final RenderType RAINBOW_RENDER_TYPE = RenderTypes.entityTranslucent(WHITE_TEXTURE);
 
     private static final int[] DAY_COLORS = {
         0xFF3B30, // Red
@@ -192,39 +185,16 @@ public class RainbowRenderer {
 
         context.submitNodeCollector().submitCustomGeometry(
             poseStack,
-            RAINBOW_RENDER_TYPE,
+            RenderTypes.debugQuads(),
             (pose, consumer) -> {
                 for (PixelQuad q : quads) {
                     float pixelAlpha = alpha * q.edgeFade();
                     if (pixelAlpha <= 0.003f) continue;
 
-                    consumer.addVertex(pose, q.x0(), q.y0(), 0.0f)
-                        .setColor(q.r(), q.g(), q.b(), pixelAlpha)
-                        .setUv(0.0f, 0.0f)
-                        .setOverlay(OverlayTexture.NO_OVERLAY)
-                        .setLight(FULL_BRIGHT)
-                        .setNormal(pose, 0.0f, 0.0f, 1.0f);
-
-                    consumer.addVertex(pose, q.x1(), q.y0(), 0.0f)
-                        .setColor(q.r(), q.g(), q.b(), pixelAlpha)
-                        .setUv(1.0f, 0.0f)
-                        .setOverlay(OverlayTexture.NO_OVERLAY)
-                        .setLight(FULL_BRIGHT)
-                        .setNormal(pose, 0.0f, 0.0f, 1.0f);
-
-                    consumer.addVertex(pose, q.x1(), q.y1(), 0.0f)
-                        .setColor(q.r(), q.g(), q.b(), pixelAlpha)
-                        .setUv(1.0f, 1.0f)
-                        .setOverlay(OverlayTexture.NO_OVERLAY)
-                        .setLight(FULL_BRIGHT)
-                        .setNormal(pose, 0.0f, 0.0f, 1.0f);
-
-                    consumer.addVertex(pose, q.x0(), q.y1(), 0.0f)
-                        .setColor(q.r(), q.g(), q.b(), pixelAlpha)
-                        .setUv(0.0f, 1.0f)
-                        .setOverlay(OverlayTexture.NO_OVERLAY)
-                        .setLight(FULL_BRIGHT)
-                        .setNormal(pose, 0.0f, 0.0f, 1.0f);
+                    consumer.addVertex(pose, q.x0(), q.y0(), 0.0f).setColor(q.r(), q.g(), q.b(), pixelAlpha);
+                    consumer.addVertex(pose, q.x1(), q.y0(), 0.0f).setColor(q.r(), q.g(), q.b(), pixelAlpha);
+                    consumer.addVertex(pose, q.x1(), q.y1(), 0.0f).setColor(q.r(), q.g(), q.b(), pixelAlpha);
+                    consumer.addVertex(pose, q.x0(), q.y1(), 0.0f).setColor(q.r(), q.g(), q.b(), pixelAlpha);
                 }
             }
         );
